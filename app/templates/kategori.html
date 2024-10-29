@@ -5,7 +5,7 @@
     <div class="judul">
         <h1>Kategori</h1>
     </div>
-    <a href="" type="button" class="btn tambah-barang">Tambah Kategori</a>
+    <a href="{{ url_for('tambah_kategori') }}" type="button" class="btn tambah-barang">Tambah Kategori</a>
 </div>
 
 <table>
@@ -27,42 +27,14 @@
                 <button class="btn delete">Hapus</button>
             </td>
         </tr>
-
-
-        <!-- <tr>
-        <td>K001</td>
-        <td>Perabotan</td>
-        <td>
-        <button class="btn edit">Edit</button>
-        <button class="btn delete">Hapus</button>
-        </td>
-      </tr>
-      <tr>
-        <td>K001</td>
-        <td>Perabotan</td>
-        <td>
-        <button class="btn edit">Edit</button>
-        <button class="btn delete">Hapus</button>
-        </td>
-      </tr>
-      <tr>
-        <td>K001</td>
-        <td>Perabotan</td>
-        <td>
-        <button class="btn edit">Edit</button>
-        <button class="btn delete">Hapus</button>
-        </td>
-      </tr>
-      <tr>
-        <td>K001</td>
-        <td>Perabotan</td>
-        <td>
-        <button class="btn edit">Edit</button>
-        <button class="btn delete">Hapus</button>
-        </td>
-      </tr> -->
       {% endfor %}
     </tbody>
-    
 </table>
+
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has('success')) {
+      alert('Kategori berhasil ditambah!');
+  }
+</script>
 {% endblock %}

@@ -1,6 +1,6 @@
 from app.model.kategoribarang import kategoribarang
 from app import db
-from flask import request, render_template, jsonify
+from flask import request, render_template, jsonify, redirect, url_for
 
 def index():
     try:
@@ -31,7 +31,7 @@ def save():
         Kategori = kategoribarang(id_kategori=id_kategori, nama_kategori=nama_kategori)
         db.session.add(Kategori)
         db.session.commit()
-        return jsonify({'success': True, 'message': 'Data Berhasil Ditambah'}), 200
+        return redirect(url_for('kategori', success=True))
     except Exception as e:
         print(e)
         return jsonify({'error': str(e), 'message': "Gagal menyimpan data"}), 500

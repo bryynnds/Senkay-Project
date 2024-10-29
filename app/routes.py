@@ -45,6 +45,14 @@ def kategori():
         return KategoriBarangController.index()
     else:
         return KategoriBarangController.save()
+    
+@app.route('/tambah_kategori')
+def tambah_kategori():
+    return render_template('tambah_kategori.html')
+
+@app.route('/simpan_kategori', methods=['POST'])
+def simpan_kategori():
+    return KategoriBarangController.save()
 
 @app.route('/data_barang/add', methods=['GET', 'POST'])
 def add_barang():
