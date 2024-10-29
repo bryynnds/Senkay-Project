@@ -7,8 +7,11 @@
     </div>
   </div>
 <form action="/update_kategori/{{ kategori.id_kategori }}" method="POST">
-  <label for="nama_kategori">Nama Kategori:</label>
-  <input type="text" id="nama_kategori" name="nama_kategori" value="{{ kategori.nama_kategori }}" required>
+
+  <div class="form-group">
+    <label for="nama_kategori">Nama Kategori:</label>
+    <input type="text" id="nama_kategori" name="nama_kategori" value="{{ kategori.nama_kategori }}" required>
+  </div>
 
   <button type="submit">Simpan Perubahan</button>
 </form>

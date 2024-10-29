@@ -115,4 +115,45 @@ def tambah_barang():
     kategoris = kategoribarang.query.all()
     return render_template("tambah_barang.html", kategoris=kategoris)
 
+def edit_barang(id_barang):
+    try:
+        # Query untuk mencari barang berdasarkan id_barang
+        Barang = barang.query.filter_by(id_barang=id_barang).first()
+        kategoris = kategoribarang.query.all()  # ambil semua kategori untuk dropdown
+
+        # Periksa apakah Barang ditemukan
+        if not Barang:
+            flash("Data barang tidak ditemukan", "danger")
+            return redirect(url_for('data_barang'))
+        
+        return render_template("edit_barang.html", barang=Barang, kategoris=kategoris)
+    except Exception as e:
+        print("Error:", e)
+        flash("Gagal mengambil data barang", "danger")
+        return redirect(url_for('data_barang'))
+
+
+def update_barang(id_barang):
+    try:
+        Barang = barang.query.filter_by(id_barang=id_barang).first()
+        if not Barang:
+            flash("Data barang tidak ditemukan", "danger")
+            return redirect(url_for('data_barang'))
+
+        # Update data barang dengan data dari form
+        Barang.nama_barang = request.form.get('nama_barang')
+        Barang.deskripsi = request.form.get('deskripsi')
+        Barang.id_kategori = request.form.get('id_kategori')
+        Barang.stok = int(request.form.get('stok'))
+        Barang.harga = float(request.form.get('harga'))
+
+        db.session.commit()
+        flash("Data barang berhasil diperbarui", "success")
+        return redirect(url_for('data_barang'))
+    except Exception as e:
+        print(e)
+        flash("Gagal memperbarui data barang", "danger")
+        return redirect(url_for('edit_barang', id_barang=id_barang))
+
+
 

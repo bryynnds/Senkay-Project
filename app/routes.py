@@ -31,6 +31,15 @@ def tambah_barang():
 def save_barang():
     return DataBarangController.save()
 
+@app.route('/edit_barang/<int:id_barang>', methods=['GET'])
+def edit_barang_route(id_barang):
+    return DataBarangController.edit_barang(id_barang)
+
+@app.route('/update_barang/<int:id_barang>', methods=['POST'])
+def update_barang_route(id_barang):
+    return DataBarangController.update_barang(id_barang)
+
+
 @app.route('/supplier', methods=['GET', 'POST'])
 def supplier():
     if request.method == 'GET':
