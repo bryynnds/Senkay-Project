@@ -1,97 +1,45 @@
-{% extends "base.html" %}
+  {% extends "base.html" %}
 
-{% block content %}
-<div class="header-bar">
-  <div class="judul">
-    <h1>Supplier</h1>
+  {% block content %}
+  <div class="header-bar">
+    <div class="judul">
+      <h1>Supplier</h1>
+    </div>
+    <a href="{{ url_for('tambah_supplier') }}" type="button" class="btn tambah-barang">Tambah Supplier</a>
   </div>
-  <a href="" type="button" class="btn tambah-barang">Tambah Supplier</a>
-</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>ID Supplier</th>
-      <th>Nama Supplier</th>
-      <th>Alamat</th>
-      <th>No Telepon</th>
-      <th>Aksi</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for item in values %}
-    <tr>
-      <td>{{item.id_supplier}}</td>
-      <td>{{item.nama_supplier}}</td>
-      <td>{{item.alamat_supplier}}</td>
-      <td>{{item.telepon_supplier}}</td>
-      <td>
-        <button class="btn edit">Edit</button>
-        <button class="btn delete">Hapus</button>
-      </td>
-    </tr>
-    {% endfor %}
-    <!-- <tr>
-        <td>SPL230</td>
-        <td>PT. Kayu Bahagia</td>
-        <td>Colomadu</td>
-        <td>089726328172</td>
+  <table>
+    <thead>
+      <tr>
+        <th>ID Supplier</th>
+        <th>Nama Supplier</th>
+        <th>Alamat</th>
+        <th>No Telepon</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in values %}
+      <tr>
+        <td>{{item.id_supplier}}</td>
+        <td>{{item.nama_supplier}}</td>
+        <td>{{item.alamat_supplier}}</td>
+        <td>{{item.telepon_supplier}}</td>
         <td>
-        <button class="btn edit">Edit</button>
-        <button class="btn delete">Hapus</button>
+          <button class="btn edit">Edit</button>
+          <button class="btn delete">Hapus</button>
         </td>
       </tr>
-      <tr>
-        <td>SPL230</td>
-        <td>PT. Kayu Bahagia</td>
-        <td>Colomadu</td>
-        <td>089726328172</td>
-        <td>
-        <button class="btn edit">Edit</button>
-        <button class="btn delete">Hapus</button>
-        </td>
-      </tr>
-      <tr>
-        <td>SPL230</td>
-        <td>PT. Kayu Bahagia</td>
-        <td>Colomadu</td>
-        <td>089726328172</td>
-        <td>
-        <button class="btn edit">Edit</button>
-        <button class="btn delete">Hapus</button>
-        </td>
-      </tr>
-      <tr>
-        <td>SPL230</td>
-        <td>PT. Kayu Bahagia</td>
-        <td>Colomadu</td>
-        <td>089726328172</td>
-        <td>
-        <button class="btn edit">Edit</button>
-        <button class="btn delete">Hapus</button>
-        </td>
-      </tr>
-      <tr>
-        <td>SPL230</td>
-        <td>PT. Kayu Bahagia</td>
-        <td>Colomadu</td>
-        <td>089726328172</td>
-        <td>
-        <button class="btn edit">Edit</button>
-        <button class="btn delete">Hapus</button>
-        </td>
-      </tr>
-      <tr>
-        <td>SPL230</td>
-        <td>PT. Kayu Bahagia</td>
-        <td>Colomadu</td>
-        <td>089726328172</td>
-        <td>
-        <button class="btn edit">Edit</button>
-        <button class="btn delete">Hapus</button>
-        </td>
-      </tr> -->
-  </tbody>
-</table>
+      {% endfor %}
+    </tbody>
+  </table>
 
-{% endblock %}
+  <script>
+    // Cek apakah ada parameter 'success' di query string
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('success')) {
+        alert('Data supplier berhasil ditambah!');
+    }
+  </script>
+
+  {% endblock %}

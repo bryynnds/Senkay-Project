@@ -1,6 +1,6 @@
 from app.model.supplier import supplier
 from app import db
-from flask import request, render_template, jsonify
+from flask import request, render_template, jsonify, redirect, url_for
 
 def index():
     try:
@@ -35,7 +35,7 @@ def save():
         Supplier = supplier(id_supplier=id_supplier, nama_supplier=nama_supplier, alamat_supplier=alamat_supplier, telepon_supplier=telepon_supplier)
         db.session.add(Supplier)
         db.session.commit()
-        return jsonify({'success': True, 'message': 'Data Berhasil Ditambah'}), 200
+        return redirect(url_for('supplier', success=True))
     except Exception as e:
         print(e)
         return jsonify({'error': str(e), 'message': "Gagal menyimpan data"}), 500

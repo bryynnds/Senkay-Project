@@ -30,6 +30,14 @@ def supplier():
         return SupplierController.index()
     else:
         return SupplierController.save()
+    
+@app.route('/tambah_supplier')
+def tambah_supplier():
+    return render_template('tambah_supplier.html')
+
+@app.route('/simpan_supplier', methods=['POST'])
+def simpan_supplier():
+    return SupplierController.save()
 
 @app.route('/kategori', methods=['GET', 'POST'])
 def kategori():
