@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
-  <h1>Tambah Kategori</h1>
-  <form action="{{ url_for('simpan_kategori') }}" method="POST">
-    <label for="nama_kategori">Nama Kategori:</label>
-    <input type="text" id="nama_kategori" name="nama_kategori" required>
-    
-    <button type="submit" class="btn simpan">Simpan</button>
-  </form>
+<div class="header-bar">
+  <div class="judul">
+    <h1>Tambah Kategori</h1>
+  </div>
 </div>
+<form action="{{ url_for('simpan_kategori') }}" method="POST">
+  <label for="nama_kategori">Nama Kategori:</label>
+  <input type="text" id="nama_kategori" name="nama_kategori" required>
+  
+  <button type="submit" class="btn simpan">Simpan</button>
+</form>
 {% endblock %}

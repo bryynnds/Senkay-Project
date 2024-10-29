@@ -1,17 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Edit Supplier</h1>
+<div class="header-bar">
+    <div class="judul">
+        <h1>Edit Supplier</h1>
+    </div>
+</div>
 <form action="/update_supplier/{{ supplier.id_supplier }}" method="POST">
-  <label for="nama_supplier">Nama Supplier:</label>
-  <input type="text" id="nama_supplier" name="nama_supplier" value="{{ supplier.nama_supplier }}" required>
 
-  <label for="alamat_supplier">Alamat:</label>
-  <input type="text" id="alamat_supplier" name="alamat_supplier" value="{{ supplier.alamat_supplier }}" required>
 
-  <label for="telepon_supplier">No Telepon:</label>
-  <input type="text" id="telepon_supplier" name="telepon_supplier" value="{{ supplier.telepon_supplier }}" required>
+    <div>
+        <label for="nama_supplier">Nama Supplier:</label>
+        <input type="text" id="nama_supplier" name="nama_supplier" value="{{ supplier.nama_supplier }}" required>
+    </div>
 
-  <button type="submit">Simpan Perubahan</button>
+    <div>
+        <label for="alamat_supplier">Alamat:</label>
+        <input type="text" id="alamat_supplier" name="alamat_supplier" value="{{ supplier.alamat_supplier }}" required>
+    </div>
+
+    <div>
+        <label for="telepon_supplier">No Telepon:</label>
+        <input type="text" id="telepon_supplier" name="telepon_supplier" value="{{ supplier.telepon_supplier }}"
+            required>
+    </div>
+
+    <button type="submit">Simpan Perubahan</button>
 </form>
 {% endblock %}
