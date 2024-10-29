@@ -33,7 +33,7 @@
       <td>{{ item.harga }}</td>
       <td>
         <a href="/edit_barang/{{item.id_barang}}" class="btn edit">Edit</a>
-        <button class="btn delete">Hapus</button>
+        <a href="/delete_barang/{{item.id_barang}}" class="btn delete" onclick="return confirm('Apakah Anda yakin ingin menghapus barang ini?');">Hapus</a>
       </td>
     </tr>
     {% endfor %}

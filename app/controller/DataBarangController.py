@@ -154,6 +154,24 @@ def update_barang(id_barang):
         print(e)
         flash("Gagal memperbarui data barang", "danger")
         return redirect(url_for('edit_barang', id_barang=id_barang))
+    
+def delete_barang(id_barang):
+    try:
+        Barang = barang.query.filter_by(id_barang=id_barang).first()
+        
+        if not Barang:
+            flash("Data barang tidak ditemukan", "danger")
+            return redirect(url_for('data_barang'))
+        
+        db.session.delete(Barang)
+        db.session.commit()
+        flash("Data barang berhasil dihapus", "success")
+        return redirect(url_for('data_barang'))
+    except Exception as e:
+        print("Error:", e)
+        flash("Gagal menghapus data barang", "danger")
+        return redirect(url_for('data_barang'))
+
 
 
 

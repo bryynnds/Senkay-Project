@@ -39,6 +39,10 @@ def edit_barang_route(id_barang):
 def update_barang_route(id_barang):
     return DataBarangController.update_barang(id_barang)
 
+@app.route('/delete_barang/<int:id_barang>', methods=['GET'])
+def delete_barang_route(id_barang):
+    return DataBarangController.delete_barang(id_barang)
+
 
 @app.route('/supplier', methods=['GET', 'POST'])
 def supplier():
