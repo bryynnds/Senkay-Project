@@ -39,6 +39,10 @@ def tambah_supplier():
 def simpan_supplier():
     return SupplierController.save()
 
+@app.route('/hapus_supplier/<id_supplier>', methods=['GET'])
+def hapus_supplier(id_supplier):
+    return SupplierController.hapus_supplier(id_supplier)
+
 @app.route('/kategori', methods=['GET', 'POST'])
 def kategori():
     if request.method == 'GET':

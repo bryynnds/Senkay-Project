@@ -39,3 +39,16 @@ def save():
     except Exception as e:
         print(e)
         return jsonify({'error': str(e), 'message': "Gagal menyimpan data"}), 500
+    
+def hapus_supplier(id_supplier):
+    try:
+        Supplier = supplier.query.get(id_supplier)
+        if not Supplier:
+            return jsonify({'error': True, 'message': "Supplier tidak ditemukan"}), 404
+        db.session.delete(Supplier)
+        db.session.commit()
+        return redirect(url_for('supplier', success="Supplier berhasil dihapus!"))
+    except Exception as e:
+        print(e)
+        return jsonify({'error': str(e), 'message': "Gagal menghapus data"}), 500
+
