@@ -54,6 +54,10 @@ def tambah_kategori():
 def simpan_kategori():
     return KategoriBarangController.save()
 
+@app.route('/hapus_kategori/<id_kategori>', methods=['GET'])
+def hapus_kategori(id_kategori):
+    return KategoriBarangController.hapus_kategori(id_kategori)
+
 @app.route('/data_barang/add', methods=['GET', 'POST'])
 def add_barang():
     if request.method == 'POST':

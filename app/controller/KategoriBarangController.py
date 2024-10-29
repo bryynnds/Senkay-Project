@@ -35,3 +35,15 @@ def save():
     except Exception as e:
         print(e)
         return jsonify({'error': str(e), 'message': "Gagal menyimpan data"}), 500
+    
+def hapus_kategori(id_kategori):
+    try:
+        Kategori = kategoribarang.query.get(id_kategori)
+        if not Kategori:
+            return jsonify({'error': True, 'message': "Kategori tidak ditemukan"}), 404
+        db.session.delete(Kategori)
+        db.session.commit()
+        return redirect(url_for('kategori', success="Kategori berhasil dihapus!"))
+    except Exception as e:
+        print(e)
+        return jsonify({'error': str(e), 'message': "Gagal menghapus data"}), 500

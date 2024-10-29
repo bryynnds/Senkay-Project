@@ -24,7 +24,7 @@
             <td>{{item.nama_kategori}}</td>
             <td>
                 <button class="btn edit">Edit</button>
-                <button class="btn delete">Hapus</button>
+                <a href="{{ url_for('hapus_kategori', id_kategori=item.id_kategori) }}" onclick="return confirm('Apakah Anda yakin ingin menghapus kategori ini?');" class="btn delete">Hapus</a>
             </td>
         </tr>
       {% endfor %}
@@ -34,7 +34,7 @@
 <script>
   const urlParams = new URLSearchParams(window.location.search);
   if (urlParams.has('success')) {
-      alert('Kategori berhasil ditambah!');
+      alert('Kategori berhasil dihapus!');
   }
 </script>
 {% endblock %}
