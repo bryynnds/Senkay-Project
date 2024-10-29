@@ -1,6 +1,6 @@
 from app.model.barang import barang
 from app import response, app, db
-from flask import request, redirect, url_for,render_template, jsonify
+from flask import request, redirect, url_for,render_template, jsonify, flash
 from app.model.kategoribarang import kategoribarang
 
 def index():
@@ -103,10 +103,12 @@ def save():
         
         db.session.add(new_barang)
         db.session.commit()
+        flash('Data barang berhasil ditambahkan', 'success')
         return redirect(url_for('data_barang'))
     except Exception as e:
         print(e)
-        return jsonify({'error': str(e), 'message': "Gagal menambahkan barang"}), 500
+        flash('Gagal menambahkan data barang', 'danger')
+        return redirect(url_for('data_barang'))
 
 
 def tambah_barang():
