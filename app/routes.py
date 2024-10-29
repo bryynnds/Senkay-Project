@@ -22,7 +22,14 @@ def data_barang():
         return DataBarangController.index()
     else:
         return DataBarangController.save()
+    
+@app.route('/tambah_barang', methods=['GET'])
+def tambah_barang():
+    return DataBarangController.tambah_barang()
 
+@app.route('/save_barang', methods=['POST'])
+def save_barang():
+    return DataBarangController.save()
 
 @app.route('/supplier', methods=['GET', 'POST'])
 def supplier():
@@ -78,47 +85,8 @@ def edit_kategori_route(id_kategori):
 def update_kategori_route(id_kategori):
     return KategoriBarangController.update_kategori(id_kategori)
 
-@app.route('/data_barang/add', methods=['GET', 'POST'])
-def add_barang():
-    if request.method == 'POST':
-        new_barang = barang(
-            id_kategori=request.form['id_kategori'],
-            nama_barang=request.form['nama_barang'],
-            deskripsi=request.form['deskripsi'],
-            kategori=request.form['kategori'],
-            stok=request.form['stok'],
-            harga=request.form['harga']
-        )
-        db.session.add(new_barang)
-        db.session.commit()
-        flash('Barang berhasil ditambahkan!')
-        return redirect(url_for('data_barang'))
-    return render_template('add_barang.html')
 
-@app.route('/data_barang/edit/<int:id>', methods=['GET', 'POST'])
-def edit_barang(id):
-    barang_edit = barang.query.get_or_404(id)
-    if request.method == 'POST':
-        barang_edit.nama_barang = request.form['nama_barang']
-        barang_edit.deskripsi = request.form['deskripsi']
-        barang_edit.kategori = request.form['kategori']
-        barang_edit.stok = request.form['stok']
-        barang_edit.harga = request.form['harga']
-        db.session.commit()
-        flash('Barang berhasil diperbarui!')
-        return redirect(url_for('data_barang'))
-    return render_template('edit_barang.html', barang=barang_edit)
 
-@app.route('/data_barang/delete/<int:id>')
-def delete_barang(id):
-    barang_delete = barang.query.get_or_404(id)
-    db.session.delete(barang_delete)
-    db.session.commit()
-    flash('Barang berhasil dihapus!')
-    return redirect(url_for('data_barang'))
-
-# Barang Masuk
-# Barang Masuk
 @app.route('/barang_masuk', methods=['GET', 'POST'])
 def barang_masuk():
     if request.method == 'GET':

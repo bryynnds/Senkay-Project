@@ -5,7 +5,8 @@
   <div class="judul">
     <h1>Data Barang</h1>
   </div>
-  <a href="" type="button" class="btn tambah-barang">Tambah Barang</a>
+  <a href="{{ url_for('tambah_barang') }}" type="button" class="btn tambah-barang">Tambah Barang</a>
+
 </div>
 
 <!-- Tabel yang menampilkan data barang -->
@@ -36,72 +37,6 @@
       </td>
     </tr>
     {% endfor %}
-    <!-- {% for item in barang %}
-    <tr>
-      <td>{{ item.id_barang }}</td>
-      <td>{{ item.nama_barang }}</td>
-      <td>{{ item.deskripsi }}</td>
-      <td>{{ item.kategori }}</td>
-      <td>{{ item.stok }}</td>
-      <td>{{ item.harga }}</td>
-      <td>{{ item.tanggal_ditambahkan.strftime('%d-%m-%Y') }}</td>
-      <td>
-        
-        <a href="{{ url_for('edit_barang', id=item.id_barang) }}" class="btn-edit">Edit</a>
-        
-        <a href="{{ url_for('delete_barang', id=item.id_barang) }}" class="btn-hapus" onclick="return confirm('Yakin ingin menghapus barang ini?');">Hapus</a>
-      </td>
-    </tr>
-    {% endfor %} -->
-
-    <!-- <tr>
-      <td>BRG002</td>
-      <td>Kursi Kayu</td>
-      <td>Ini adalah kursi dari kayu</td>
-      <td>Perabotan</td>
-      <td>35</td>
-      <td>20000</td>
-      <td>
-      <button class="btn edit">Edit</button>
-      <button class="btn delete">Hapus</button>
-      </td>
-    </tr>
-    <tr>
-      <td>BRG002</td>
-      <td>Kursi Kayu</td>
-      <td>Ini adalah kursi dari kayu</td>
-      <td>Perabotan</td>
-      <td>35</td>
-      <td>20000</td>
-      <td>
-      <button class="btn edit">Edit</button>
-      <button class="btn delete">Hapus</button>
-      </td>
-    </tr>
-    <tr>
-      <td>BRG002</td>
-      <td>Kursi Kayu</td>
-      <td>Ini adalah kursi dari kayu</td>
-      <td>Perabotan</td>
-      <td>35</td>
-      <td>20000</td>
-      <td>
-      <button class="btn edit">Edit</button>
-      <button class="btn delete">Hapus</button>
-      </td>
-    </tr>
-    <tr>
-      <td>BRG002</td>
-      <td>Kursi Kayu</td>
-      <td>Ini adalah kursi dari kayu</td>
-      <td>Perabotan</td>
-      <td>35</td>
-      <td>20000</td>
-      <td>
-      <button class="btn edit">Edit</button>
-      <button class="btn delete">Hapus</button>
-      </td>
-    </tr> -->
   </tbody>
 </table>
 {% endblock %}

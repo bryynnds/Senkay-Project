@@ -84,23 +84,33 @@ def formatkategori(data):
     for i in data:
         array.append(singleKategori(i))
     return array
-    
+
 def save():
     try:
-        id_barang=request.form.get('id_barang')
-        id_kategori=request.form.get('id_kategori')
-        nama_barang=request.form.get('nama_barang')
-        deskripsi=request.form.get('deskripsi')
-        kategori=request.form.get('kategori')
-        stok=request.form.get('stok')
-        harga=request.form.get('harga')
-        tanggal_ditambahkan=request.form.get('tanggal_ditambahkan')
+        id_kategori = request.form.get('id_kategori')
+        nama_barang = request.form.get('nama_barang')
+        deskripsi = request.form.get('deskripsi')
+        stok = int(request.form.get('stok'))
+        harga = float(request.form.get('harga'))
         
-        barangs=barang(id_barang=id_barang, id_kategori=id_kategori, nama_barang=nama_barang, deskripsi=deskripsi,
-                       kategori=kategori, stok=stok, harga=harga, tanggal_ditambahkan=tanggal_ditambahkan)
-        db.session.add(barangs)
+        new_barang = barang(
+            id_kategori=id_kategori,
+            nama_barang=nama_barang,
+            deskripsi=deskripsi,
+            stok=stok,
+            harga=harga
+        )
+        
+        db.session.add(new_barang)
         db.session.commit()
-        return response.success(',','Data Berhasil Ditambah')
+        return redirect(url_for('data_barang'))
     except Exception as e:
         print(e)
-        
+        return jsonify({'error': str(e), 'message': "Gagal menambahkan barang"}), 500
+
+
+def tambah_barang():
+    kategoris = kategoribarang.query.all()
+    return render_template("tambah_barang.html", kategoris=kategoris)
+
+
