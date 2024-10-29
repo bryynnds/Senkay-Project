@@ -47,3 +47,26 @@ def hapus_kategori(id_kategori):
     except Exception as e:
         print(e)
         return jsonify({'error': str(e), 'message': "Gagal menghapus data"}), 500
+
+# Fungsi untuk menampilkan form edit kategori
+def edit_kategori(id_kategori):
+    kategori_data = kategoribarang.query.get(id_kategori)
+    if kategori_data:
+        return render_template("edit_kategori.html", kategori=kategori_data)
+    else:
+        return jsonify({'error': 'Data tidak ditemukan'}), 404
+
+# Fungsi untuk menyimpan perubahan
+def update_kategori(id_kategori):
+    try:
+        kategori_data = kategoribarang.query.get(id_kategori)
+        if kategori_data:
+            kategori_data.nama_kategori = request.form['nama_kategori']
+            
+            db.session.commit()
+            return redirect(url_for('kategori'))
+        else:
+            return jsonify({'error': 'Data tidak ditemukan'}), 404
+    except Exception as e:
+        print(e)
+        return jsonify({'error': str(e), 'message': 'Gagal memperbarui data'}), 500

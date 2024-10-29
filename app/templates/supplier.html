@@ -26,7 +26,7 @@
         <td>{{item.alamat_supplier}}</td>
         <td>{{item.telepon_supplier}}</td>
         <td>
-          <button class="btn edit">Edit</button>
+          <a href="/edit_supplier/{{item.id_supplier}}" class="btn edit">Edit</a>
           <a href="{{ url_for('hapus_supplier', id_supplier=item.id_supplier) }}" onclick="return confirm('Apakah Anda yakin ingin menghapus supplier ini?');" class="btn delete">Hapus</a>
         </td>
       </tr>

@@ -23,7 +23,7 @@
             <td>{{item.id_kategori}}</td>
             <td>{{item.nama_kategori}}</td>
             <td>
-                <button class="btn edit">Edit</button>
+                <a href="/edit_kategori/{{item.id_kategori}}" class="btn edit">Edit</a>
                 <a href="{{ url_for('hapus_kategori', id_kategori=item.id_kategori) }}" onclick="return confirm('Apakah Anda yakin ingin menghapus kategori ini?');" class="btn delete">Hapus</a>
             </td>
         </tr>

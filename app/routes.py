@@ -43,6 +43,14 @@ def simpan_supplier():
 def hapus_supplier(id_supplier):
     return SupplierController.hapus_supplier(id_supplier)
 
+@app.route('/edit_supplier/<id_supplier>', methods=['GET'])
+def edit_supplier_route(id_supplier):
+    return SupplierController.edit_supplier(id_supplier)
+
+@app.route('/update_supplier/<id_supplier>', methods=['POST'])
+def update_supplier_route(id_supplier):
+    return SupplierController.update_supplier(id_supplier)
+
 @app.route('/kategori', methods=['GET', 'POST'])
 def kategori():
     if request.method == 'GET':
@@ -61,6 +69,14 @@ def simpan_kategori():
 @app.route('/hapus_kategori/<id_kategori>', methods=['GET'])
 def hapus_kategori(id_kategori):
     return KategoriBarangController.hapus_kategori(id_kategori)
+
+@app.route('/edit_kategori/<id_kategori>', methods=['GET'])
+def edit_kategori_route(id_kategori):
+    return KategoriBarangController.edit_kategori(id_kategori)
+
+@app.route('/update_kategori/<id_kategori>', methods=['POST'])
+def update_kategori_route(id_kategori):
+    return KategoriBarangController.update_kategori(id_kategori)
 
 @app.route('/data_barang/add', methods=['GET', 'POST'])
 def add_barang():
