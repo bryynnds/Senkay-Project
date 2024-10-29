@@ -1,6 +1,6 @@
 from app.model.kategoribarang import kategoribarang
 from app import db
-from flask import request, render_template, jsonify, redirect, url_for
+from flask import request, render_template, jsonify, redirect, url_for, flash
 
 def index():
     try:
@@ -31,22 +31,28 @@ def save():
         Kategori = kategoribarang(id_kategori=id_kategori, nama_kategori=nama_kategori)
         db.session.add(Kategori)
         db.session.commit()
-        return redirect(url_for('kategori', success=True))
+        flash('Data kategori berhasil ditambahkan', 'success')
+        return redirect(url_for('kategori'))
     except Exception as e:
         print(e)
-        return jsonify({'error': str(e), 'message': "Gagal menyimpan data"}), 500
+        flash('Gagal menambahkan data kategori', 'danger')
+        return redirect(url_for('kategori'))
     
 def hapus_kategori(id_kategori):
     try:
-        Kategori = kategoribarang.query.get(id_kategori)
-        if not Kategori:
-            return jsonify({'error': True, 'message': "Kategori tidak ditemukan"}), 404
-        db.session.delete(Kategori)
-        db.session.commit()
-        return redirect(url_for('kategori', success="Kategori berhasil dihapus!"))
+        kategori_data = kategoribarang.query.get(id_kategori)
+        if kategori_data:
+            db.session.delete(kategori_data)
+            db.session.commit()
+            flash('Data kategori berhasil dihapus', 'success')
+            return redirect(url_for('kategori'))
+        else:
+            flash('Data kategori tidak ditemukan', 'warning')
+            return redirect(url_for('kategori'))
     except Exception as e:
         print(e)
-        return jsonify({'error': str(e), 'message': "Gagal menghapus data"}), 500
+        flash('Gagal menghapus data kategori', 'danger')
+        return redirect(url_for('kategori'))
 
 # Fungsi untuk menampilkan form edit kategori
 def edit_kategori(id_kategori):
@@ -64,9 +70,12 @@ def update_kategori(id_kategori):
             kategori_data.nama_kategori = request.form['nama_kategori']
             
             db.session.commit()
+            flash('Data kategori berhasil diperbarui', 'success')
             return redirect(url_for('kategori'))
         else:
-            return jsonify({'error': 'Data tidak ditemukan'}), 404
+            flash('Data kategori tidak ditemukan', 'warning')
+            return redirect(url_for('kategori'))
     except Exception as e:
         print(e)
-        return jsonify({'error': str(e), 'message': 'Gagal memperbarui data'}), 500
+        flash('Gagal memperbarui data kategori', 'danger')
+        return redirect(url_for('kategori'))

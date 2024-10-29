@@ -1,6 +1,6 @@
 from app.model.supplier import supplier
 from app import db
-from flask import request, render_template, jsonify, redirect, url_for
+from flask import request, render_template, jsonify, redirect, url_for, flash
 
 def index():
     try:
@@ -35,22 +35,28 @@ def save():
         Supplier = supplier(id_supplier=id_supplier, nama_supplier=nama_supplier, alamat_supplier=alamat_supplier, telepon_supplier=telepon_supplier)
         db.session.add(Supplier)
         db.session.commit()
-        return redirect(url_for('supplier', success=True))
+        flash('Data supplier berhasil ditambahkan', 'success')
+        return redirect(url_for('supplier'))
     except Exception as e:
         print(e)
-        return jsonify({'error': str(e), 'message': "Gagal menyimpan data"}), 500
+        flash('Gagal menambahkan data supplier', 'danger')
+        return redirect(url_for('supplier'))
     
 def hapus_supplier(id_supplier):
     try:
-        Supplier = supplier.query.get(id_supplier)
-        if not Supplier:
-            return jsonify({'error': True, 'message': "Supplier tidak ditemukan"}), 404
-        db.session.delete(Supplier)
-        db.session.commit()
-        return redirect(url_for('supplier', success="Supplier berhasil dihapus!"))
+        supplier_data = supplier.query.get(id_supplier)
+        if supplier_data:
+            db.session.delete(supplier_data)
+            db.session.commit()
+            flash('Data supplier berhasil dihapus', 'success')
+            return redirect(url_for('supplier'))
+        else:
+            flash('Data supplier tidak ditemukan', 'warning')
+            return redirect(url_for('supplier'))
     except Exception as e:
         print(e)
-        return jsonify({'error': str(e), 'message': "Gagal menghapus data"}), 500
+        flash('Gagal menghapus data supplier', 'danger')
+        return redirect(url_for('supplier'))
     
 def edit_supplier(id_supplier):
     supplier_data = supplier.query.get(id_supplier)
@@ -69,10 +75,13 @@ def update_supplier(id_supplier):
             supplier_data.telepon_supplier = request.form['telepon_supplier']
             
             db.session.commit()
+            flash('Data supplier berhasil diperbarui', 'success')
             return redirect(url_for('supplier'))
         else:
-            return jsonify({'error': 'Data tidak ditemukan'}), 404
+            flash('Data supplier tidak ditemukan', 'warning')
+            return redirect(url_for('supplier'))
     except Exception as e:
         print(e)
-        return jsonify({'error': str(e), 'message': 'Gagal memperbarui data'}), 500
+        flash('Gagal memperbarui data supplier', 'danger')
+        return redirect(url_for('supplier'))
 

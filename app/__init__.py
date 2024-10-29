@@ -15,3 +15,5 @@ from app.model import barang
 from app.model import supplier
 from app.model import transaksimasuk
 from app.model import transaksikeluar
+
+app.secret_key = 'esa130219231'

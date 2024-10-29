@@ -82,10 +82,33 @@
             <img src="{{ url_for('static', filename='images/undraw_profile_1.svg') }}" alt="Profile">
         </div>
         </nav>
+
+        <div class="alert-container">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+
         <div class="content">
             {% block content %}
             {% endblock %}
         </div>
+
+        <script>
+            // Script to automatically hide alert after a few seconds
+            setTimeout(() => {
+                const alerts = document.querySelectorAll('.alert');
+                alerts.forEach(alert => {
+                    alert.style.display = 'none';
+                });
+            }, 3000); // Hides alert after 3 seconds
+        </script>
     </body>
     <!-- MAIN JS -->
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
