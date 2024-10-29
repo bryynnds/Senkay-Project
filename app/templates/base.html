@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- STYLES CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        
+        <!-- BOX ICONS CSS-->
+        <!-- choose one -->
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+        <title>{% block title %}Sidebar menu{% endblock %}</title>
+    </head>
+    <body id="body">
+        <div class="l-navbar" id="navbar">
+            <nav class="nav">
+                <div>
+                    <a href="#" class="nav__logo">
+                        <img src="{{ url_for('static', filename='images/archive.svg') }}" alt="" class="nav__logo-icon">
+                        <span class="nav__logo-text">Senkay Project</span>
+                    </a>
+    
+                    <div class="nav__toggle" id="nav-toggle">
+                        <i class='bx bx-chevron-right'></i>
+                    </div>
+    
+                    <ul class="nav__list">
+                        <!-- Tombol Dashboard -->
+                        <a href="{{ url_for('dashboard') }}" class="nav__link {% if request.endpoint == 'dashboard' %}active{% endif %}">
+                            <i class='bx bx-grid-alt nav__icon'></i>
+                            <span class="nav__text">Dashboard</span>
+                        </a>
+                        <!-- Tombol Data Barang -->
+                        <a href="{{ url_for('data_barang') }}" class="nav__link {% if request.endpoint == 'data_barang' %}active{% endif %}">
+                            <i class='bx bx-package nav__icon' ></i>
+                            <span class="nav__text">Data Barang</span>
+                        </a>
+                        <a href="{{ url_for('kategori') }}" class="nav__link {% if request.endpoint == 'kategori' %}active{% endif %}">
+                            <i class='bx bx-user nav__icon' ></i>
+                            <span class="nav__text">Kategori</span>
+                        </a>
+                        <a href="{{ url_for('supplier') }}" class="nav__link {% if request.endpoint == 'supplier' %}active{% endif %}">
+                            <i class='bx bx-user nav__icon' ></i>
+                            <span class="nav__text">Supplier</span>
+                        </a>
+                        <!-- Tombol Barang Masuk -->
+                        <a href="{{ url_for('barang_masuk') }}" class="nav__link {% if request.endpoint == 'barang_masuk' %}active{% endif %}">
+                            <i class='bx bx-bell nav__icon' ></i>
+                            <span class="nav__text">Barang Masuk</span>
+                        </a>
+                        <!-- Tombol Barang Keluar -->
+                        <a href="{{ url_for('barang_keluar') }}" class="nav__link {% if request.endpoint == 'barang_keluar' %}active{% endif %}">
+                            <i class='bx bx-heart nav__icon'></i>
+                            <span class="nav__text">Barang Keluar</span>
+                        </a>
+                        
+                        <!-- <a href="{{ url_for('laporan_barangmasuk') }}" class="nav__link {% if request.endpoint == 'laporan_barangmasuk' %}active{% endif %}">
+                            <i class='bx bx-bookmark nav__icon'></i>
+                            <span class="nav__text">Laporan Barang Masuk</span>
+                        </a>
+                        
+                        <a href="{{ url_for('laporan_barangkeluar') }}" class="nav__link {% if request.endpoint == 'laporan_barangkeluar' %}active{% endif %}">
+                            <i class='bx bx-message-rounded nav__icon' ></i>
+                            <span class="nav__text">Laporan Barang Keluar</span>
+                        </a>                  -->
+                    </ul>
+                </div>
+                <a href="#" class="nav__link">           
+                    <i class='bx bx-log-out-circle nav__icon'></i>
+                    <span class="nav__text">Close</span>
+                </a>
+            </nav>
+        </div>
+        <nav class="topbar">
+            <div class="search-box">
+            <input type="text" placeholder="Search...">
+            <button>Search</button>
+        </div>
+        <div class="profile">
+            <span>Hi, Admin</span>
+            <img src="{{ url_for('static', filename='images/undraw_profile_1.svg') }}" alt="Profile">
+        </div>
+        </nav>
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </body>
+    <!-- MAIN JS -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</html>

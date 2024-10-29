@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="header-bar">
+    <div class="judul">
+        <h1>Kategori</h1>
+    </div>
+    <a href="" type="button" class="btn tambah-barang">Tambah Kategori</a>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID Kategori</th>
+            <th>Nama Kategori</th>
+            <th>Aksi</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in values %}
+        <tr>
+            <td>{{item.id_kategori}}</td>
+            <td>{{item.nama_kategori}}</td>
+            <td>
+                <button class="btn edit">Edit</button>
+                <button class="btn delete">Hapus</button>
+            </td>
+        </tr>
+
+
+        <!-- <tr>
+        <td>K001</td>
+        <td>Perabotan</td>
+        <td>
+        <button class="btn edit">Edit</button>
+        <button class="btn delete">Hapus</button>
+        </td>
+      </tr>
+      <tr>
+        <td>K001</td>
+        <td>Perabotan</td>
+        <td>
+        <button class="btn edit">Edit</button>
+        <button class="btn delete">Hapus</button>
+        </td>
+      </tr>
+      <tr>
+        <td>K001</td>
+        <td>Perabotan</td>
+        <td>
+        <button class="btn edit">Edit</button>
+        <button class="btn delete">Hapus</button>
+        </td>
+      </tr>
+      <tr>
+        <td>K001</td>
+        <td>Perabotan</td>
+        <td>
+        <button class="btn edit">Edit</button>
+        <button class="btn delete">Hapus</button>
+        </td>
+      </tr> -->
+      {% endfor %}
+    </tbody>
+    
+</table>
+{% endblock %}

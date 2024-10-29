@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <div class="judul">
+        <h1>Dashboard</h1>
+    </div>
+    <div class="data">
+        <div class="data-box">
+            <img src="{{ url_for('static', filename='images/boxes.png') }}" alt="data-icon" class="data-icon">
+            <div class="data-text">
+                <h2>Data Barang</h2>
+                <p>{{ total_barang }}</p>
+            </div>
+        </div>
+        <div class="data-box">
+            <img src="{{ url_for('static', filename='images/ready-stock.png') }}" alt="data-icon" class="data-icon">
+            <div class="data-text">
+                <h2>Barang Masuk</h2>
+                <p>{{ total_barang_masuk }}</p>
+            </div>
+        </div>
+        <div class="data-box">
+            <img src="{{ url_for('static', filename='images/out-of-stock.png') }}" alt="data-icon" class="data-icon">
+            <div class="data-text">
+                <h2>Barang Keluar</h2>
+                <p>{{ total_barang_keluar }}</p>
+            </div>
+        </div>
+        <div class="data-box">
+            <img src="{{ url_for('static', filename='images/supplier.png') }}" alt="data-icon" class="data-icon">
+            <div class="data-text">
+                <h2>Supplier</h2>
+                <p>{{ total_supplier }}</p>
+            </div>
+        </div>
+        <div class="data-box">
+            <img src="{{ url_for('static', filename='images/categorization.png') }}" alt="data-icon" class="data-icon">
+            <div class="data-text">
+                <h2>Kategori</h2>
+                <p>{{ total_kategori }}</p>
+            </div>
+        </div>
+        
+    </div>
+    <div class="judul">
+        <h2>Stok Mencapai Batas Minimum</h2>
+    </div>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Kode Barang</th>
+                    <th>Nama Barang</th>
+                    <th>Stok</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% set idx = 1 %}
+                {% for item in barang_minimum %}
+                <tr>
+                    <td>{{ idx }}</td>
+                    <td>{{ item.id_barang }}</td>
+                    <td>{{ item.nama_barang }}</td>
+                    <td>{{ item.stok }}</td>
+                </tr>
+                {% set idx = idx + 1 %}
+                {% else %}
+                <tr>
+                    <td colspan="4">Tidak ada barang dengan stok di bawah 50</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

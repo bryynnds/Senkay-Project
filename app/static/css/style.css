@@ -1,0 +1,430 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap");
+
+/*===== VARIABLES CSS Y SASS =====*/
+:root {
+  --first-color: #12192C;
+  --second-color: #F5A623;
+  --white-color: #EDEDED;
+  --body-font: 'Quicksand', sans-serif;
+  --small-font-size: 0.875rem;
+  --z-back: -10;
+  --z-normal: 1;
+  --z-tooltip: 10;
+  --z-fixed: 100;
+  --z-modal: 1000;
+}
+
+@media screen and (min-width: 768px) {
+  :root {
+    --small-font-size: 0.938rem;
+  }
+}
+
+/*===== BASE =====*/
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  padding: 0 0 0 15.6rem;
+  font-family: var(--body-font);
+  background-color: var(--white-color);
+  transition: .5s;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--first-color);
+  margin-bottom: 1.5rem;
+}
+
+h1::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: var(--second-color);
+  margin-top: 0.5rem;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/*===== NAV =====*/
+.l-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  background-color: var(--first-color);
+  padding: 1.25rem .5rem 2rem;
+  transition: .5s;
+  z-index: var(--z-fixed);
+}
+
+.nav {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.nav__logo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 0 .5rem;
+}
+
+.nav__logo-icon {
+  margin-right: 1.2rem;
+}
+
+.nav__logo-text {
+  color: var(--white-color);
+  font-weight: 700;
+}
+
+.nav__toggle {
+  position: absolute;
+  top: 1.9rem;
+  right: -0.6rem;
+  width: 18px;
+  height: 18px;
+  background-color: var(--second-color);
+  border-radius: 50%;
+  font-size: 1.25rem;
+  color: var(--first-color);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: .5s;
+}
+
+.show .nav__toggle {
+  right: -0.5rem;
+}
+
+.nav__link {
+  display: flex;
+  align-items: center;
+  padding: .5rem;
+  margin-bottom: 1rem;
+  border-radius: .5rem;
+  color: var(--white-color);
+  transition: .3s;
+}
+
+.nav__link:hover {
+  background-color: var(--second-color);
+  color: var(--first-color);
+}
+
+.nav__icon {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+}
+
+.nav__text {
+  font-weight: 700;
+}
+
+/* Show menu */
+.show {
+  width: 250px;
+}
+
+/* Rotate toggle */
+.rotate {
+  transform: rotate(180deg);
+  transition: .5s;
+}
+
+/* Active links menu */
+.active {
+  background-color: var(--second-color);
+  color: var(--first-color);
+}
+
+/* Add padding body */
+.expander {
+  padding: 1rem 0 0 19rem;
+  transition: .5s;
+}
+
+/* ===== TABEL ===== */
+table {
+  width: 95%;
+  border-collapse: collapse;
+  margin: 20px;
+  margin-left: 32px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+table th,
+table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+table td {
+  background-color: #fff;
+}
+
+table th {
+  background-color: var(--first-color);
+  color: var(--white-color);
+}
+
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+table tr:hover {
+  background-color: var(--second-color);
+  color: var(--first-color);
+}
+
+table td a {
+  color: var(--first-color);
+  font-weight: bold;
+}
+
+table td a.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  text-align: center;
+  margin-right: 0.5rem;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.btn-primary {
+  background-color: var(--second-color);
+}
+
+.btn-warning {
+  background-color: #ffc107;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+}
+
+/* ===== FORM ===== */
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+button[type="submit"] {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--second-color);
+  color: var(--white-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: var(--first-color);
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1f3264;
+  padding: 10px 20px;
+  color: #fff;
+}
+
+/* Search box styling */
+.search-box {
+  display: flex;
+  align-items: center;
+}
+
+.search-box input[type="text"] {
+  padding: 5px;
+  border: none;
+  border-radius: 4px;
+  margin-right: 5px;
+}
+
+.search-box button {
+  padding: 5px 10px;
+  background-color: #555;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search-box button:hover {
+  background-color: #777;
+}
+
+/* Profile styling */
+.profile {
+  display: flex;
+  align-items: center;
+}
+
+.profile img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.judul {
+  padding: 1rem 0 0 2rem;
+}
+
+.data {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  padding: 0 2rem;
+  max-width: 1300px;
+}
+
+.data-box {
+  flex: 1;
+  /* Membuat kotak memenuhi lebar yang ada */
+  background-color: #fff;
+  color: #98a6ad;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  /* Memusatkan konten vertikal */
+  gap: 15px;
+  /* Jarak antara gambar dan teks */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.data-icon {
+  width: 50px; /* Ukuran gambar */
+  height: 50px;
+}
+
+.data-text {
+  display: flex;
+  padding-left: 10px;
+  flex-direction: column; /* Tampilkan teks secara vertikal */
+  justify-content: center; /* Posisikan teks di tengah */
+}
+
+.data-box h2 {
+  font-size: 1em;
+  margin-bottom: 0px;
+}
+
+.data-box p {
+  color: #323232;
+  font-weight: 700;
+  font-size: 1.2em;
+}
+
+.btn {
+  padding: 6px 12px;
+  margin-right: 5px; /* Jarak antar tombol */
+  margin-bottom: 5px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.edit {
+  background-color: #4CAF50; /* Hijau untuk tombol Edit */
+}
+
+.delete {
+  background-color: #f44336; /* Merah untuk tombol Hapus */
+}
+
+.btn:hover {
+  opacity: 0.8; /* Efek hover */
+}
+
+.header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0rem;
+}
+
+.tambah-barang {
+  padding: 8px 16px;
+  margin-right: 40px;
+  background-color: var(--second-color);
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.tambah-barang:hover {
+  background-color: var(--first-color);
+}
+
+.cetak {
+  padding: 8px 16px;
+  margin-right: 10px;
+  background-color: #30bd61;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
