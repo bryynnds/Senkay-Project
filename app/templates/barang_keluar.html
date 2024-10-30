@@ -3,11 +3,11 @@
 {% block content %}
 <div class="header-bar">
   <div class="judul">
-    <h1>Data Barang Keluar</h1>
+    <h1>Transaksi Barang Keluar</h1>
   </div>
   <div class="action-buttons">
     <a href="" type="button" class="btn cetak">Cetak Laporan</a>
-    <a href="" type="button" class="btn tambah-barang">Tambah Barang Keluar</a>
+    <a href="" type="button" class="btn tambah-barang">Tambah Transaksi</a>
   </div>
 
 </div>
@@ -34,21 +34,6 @@
       </td>
     </tr>
     {% endfor %}
-
-
-    <!-- {% for transaksi in transaksi_keluar %}
-    <tr>
-      <td>{{ transaksi.id_transaksi }}</td>
-      <td>{{ transaksi.id_barang }}</td>
-      <td>{{ transaksi.jumlah }}</td>
-      <td>{{ transaksi.id_pengguna }}</td>
-      <td>
-        <a href="{{ url_for('delete_barang_keluar', id=transaksi.id_transaksi) }}">Hapus</a>
-      </td>
-    </tr>
-    {% endfor %} -->
-
-
   </tbody>
 </table>
 {% endblock %}

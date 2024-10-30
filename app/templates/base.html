@@ -47,28 +47,19 @@
                         <!-- Tombol Barang Masuk -->
                         <a href="{{ url_for('barang_masuk') }}" class="nav__link {% if request.endpoint == 'barang_masuk' %}active{% endif %}">
                             <i class='bx bx-bell nav__icon' ></i>
-                            <span class="nav__text">Barang Masuk</span>
+                            <span class="nav__text">Transaksi Masuk</span>
                         </a>
                         <!-- Tombol Barang Keluar -->
                         <a href="{{ url_for('barang_keluar') }}" class="nav__link {% if request.endpoint == 'barang_keluar' %}active{% endif %}">
                             <i class='bx bx-heart nav__icon'></i>
-                            <span class="nav__text">Barang Keluar</span>
+                            <span class="nav__text">Transaksi Keluar</span>
                         </a>
-                        
-                        <!-- <a href="{{ url_for('laporan_barangmasuk') }}" class="nav__link {% if request.endpoint == 'laporan_barangmasuk' %}active{% endif %}">
-                            <i class='bx bx-bookmark nav__icon'></i>
-                            <span class="nav__text">Laporan Barang Masuk</span>
-                        </a>
-                        
-                        <a href="{{ url_for('laporan_barangkeluar') }}" class="nav__link {% if request.endpoint == 'laporan_barangkeluar' %}active{% endif %}">
-                            <i class='bx bx-message-rounded nav__icon' ></i>
-                            <span class="nav__text">Laporan Barang Keluar</span>
-                        </a>                  -->
+                    
                     </ul>
                 </div>
                 <a href="#" class="nav__link">           
                     <i class='bx bx-log-out-circle nav__icon'></i>
-                    <span class="nav__text">Close</span>
+                    <span class="nav__text">Logout</span>
                 </a>
             </nav>
         </div>

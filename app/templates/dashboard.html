@@ -51,22 +51,21 @@
         <table>
             <thead>
                 <tr>
-                    <th>No</th>
                     <th>Kode Barang</th>
                     <th>Nama Barang</th>
                     <th>Stok</th>
                 </tr>
             </thead>
             <tbody>
-                {% set idx = 1 %}
+                
                 {% for item in barang_minimum %}
                 <tr>
-                    <td>{{ idx }}</td>
+                    
                     <td>{{ item.id_barang }}</td>
                     <td>{{ item.nama_barang }}</td>
                     <td>{{ item.stok }}</td>
                 </tr>
-                {% set idx = idx + 1 %}
+                
                 {% else %}
                 <tr>
                     <td colspan="4">Tidak ada barang dengan stok di bawah 50</td>

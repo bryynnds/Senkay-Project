@@ -3,11 +3,11 @@
 {% block content %}
 <div class="header-bar">
   <div class="judul">
-    <h1>Data Barang Masuk</h1>
+    <h1>Transaksi Barang Masuk</h1>
   </div>
   <div class="action-buttons">
     <a href="" type="button" class="btn cetak">Cetak Laporan</a>
-    <a href="" type="button" class="btn tambah-barang">Tambah Barang Keluar</a>
+    <a href="" type="button" class="btn tambah-barang">Tambah Transaksi</a>
   </div>
 </div>
 
@@ -37,74 +37,6 @@
     </tr>
     {% endfor %}
 
-    <!-- {% for transaksi in transaksi_masuk %}
-    <tr>
-      <td>{{ transaksi.id_transaksi }}</td>
-      <td>{{ transaksi.id_barang }}</td>
-      <td>{{ transaksi.jumlah }}</td>
-      <td>{{ transaksi.id_supplier }}</td>
-      <td>{{ transaksi.id_pengguna }}</td>
-      <td>
-        <a href="{{ url_for('delete_barang_masuk', id=transaksi.id_transaksi) }}">Hapus</a>
-      </td>
-    </tr>
-    {% endfor %} -->
-
-    <!-- <tr>
-      <td>TRX0129</td>
-      <td>Kursi Kayu</td>
-      <td>50</td>
-      <td>PT. Kayu Bahagia</td>
-      
-      <td>
-        <button class="btn edit">Edit</button>
-        <button class="btn delete">Hapus</button>
-      </td>
-    </tr>
-    <tr>
-      <td>TRX0129</td>
-      <td>Kursi Kayu</td>
-      <td>50</td>
-      <td>PT. Kayu Bahagia</td>
-      
-      <td>
-        <button class="btn edit">Edit</button>
-        <button class="btn delete">Hapus</button>
-      </td>
-    </tr>
-    <tr>
-      <td>TRX0129</td>
-      <td>Kursi Kayu</td>
-      <td>50</td>
-      <td>PT. Kayu Bahagia</td>
-      
-      <td>
-        <button class="btn edit">Edit</button>
-        <button class="btn delete">Hapus</button>
-      </td>
-    </tr>
-    <tr>
-      <td>TRX0129</td>
-      <td>Kursi Kayu</td>
-      <td>50</td>
-      <td>PT. Kayu Bahagia</td>
-      
-      <td>
-        <button class="btn edit">Edit</button>
-        <button class="btn delete">Hapus</button>
-      </td>
-    </tr>
-    <tr>
-      <td>TRX0129</td>
-      <td>Kursi Kayu</td>
-      <td>50</td>
-      <td>PT. Kayu Bahagia</td>
-      
-      <td>
-        <button class="btn edit">Edit</button>
-        <button class="btn delete">Hapus</button>
-      </td>
-    </tr> -->
   </tbody>
 </table>
 {% endblock %}
