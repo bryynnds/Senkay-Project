@@ -32,7 +32,7 @@
       <td>{{ transaksi.tanggal_masuk }}</td>
       
       <td>
-        <button class="btn delete">Hapus</button>
+        <a href="/delete_transaksi/{{ transaksi.id_transaksi }}" type="button" class="btn delete" onclick="return confirm('Apakah Anda yakin ingin menghapus transaksi ini?');">Hapus</a>
       </td>
     </tr>
     {% endfor %}

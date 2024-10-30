@@ -114,6 +114,9 @@ def tambah_transaksimasuk():
 def save_transaksimasuk():
     return BarangMasukController.save()
 
+@app.route('/delete_transaksi/<id_transaksi>', methods=['GET'])
+def delete_transaksi(id_transaksi):
+    return BarangMasukController.delete_transaksi(id_transaksi)
 
 # Barang Keluar
 @app.route('/barang_keluar')
