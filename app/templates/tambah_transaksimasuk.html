@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Tambah Transaksi Masuk</h2>
+
+<form action="{{ url_for('save_transaksimasuk') }}" method="POST">
+  <div class="form-group">
+    <label for="id_barang">Nama Barang:</label>
+    <select name="id_barang" id="id_barang" required>
+      {% for item in barang %}
+        <option value="{{ item.id_barang }}">{{ item.nama_barang }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  
+  <div class="form-group">
+    <label for="jumlah">Jumlah:</label>
+    <input type="number" name="jumlah" id="jumlah" required>
+  </div>
+
+  <div class="form-group">
+    <label for="id_supplier">Supplier:</label>
+    <select name="id_supplier" id="id_supplier" required>
+      {% for supplier in suppliers %}
+        <option value="{{ supplier.id_supplier }}">{{ supplier.nama_supplier }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <button type="submit" class="btn">Simpan</button>
+</form>
+{% endblock %}

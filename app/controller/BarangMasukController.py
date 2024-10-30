@@ -1,8 +1,10 @@
 from app import db, response
-from flask import render_template, request
+from flask import render_template, request, url_for, flash, redirect
 from app.model.transaksimasuk import transaksimasuk
 from app.model.barang import barang
 from app.model.supplier import supplier
+from datetime import datetime
+import pytz
 
 def index():
     try:
@@ -116,19 +118,37 @@ def formatsupplier(data):
 
 def save():
     try:
-        # Mengambil data dari request
-        id_transaksi = request.form.get('id_transaksi')
+        # Mengambil data dari request (tanpa tanggal_masuk)
         id_barang = request.form.get('id_barang')
         jumlah = request.form.get('jumlah')
-        tanggal_masuk = request.form.get('tanggal_masuk')
         id_supplier = request.form.get('id_supplier')
 
-        # Membuat instance transaksimasuk baru
-        transaksimasuks=transaksimasuk(id_transaksi=id_transaksi, id_barang=id_barang, jumlah=jumlah, tanggal_masuk=tanggal_masuk,id_supplier=id_supplier)
+        # Membuat instance transaksimasuk baru dengan tanggal otomatis
+        jakarta_timezone = pytz.timezone('Asia/Jakarta')
+        tanggal_masuk = datetime.now(jakarta_timezone) 
+        
+        transaksimasuks = transaksimasuk(
+            id_barang=id_barang,
+            jumlah=jumlah,
+            tanggal_masuk=tanggal_masuk,  # Tanggal otomatis
+            id_supplier=id_supplier
+        )
         
         db.session.add(transaksimasuks)
         db.session.commit()
-        return response.success('', 'Data Transaksi Masuk berhasil ditambahkan')
+        flash('Transaksi baru berhasil ditambahkan', 'success')
+        return redirect(url_for('barang_masuk'))
     except Exception as e:
         print(e)
-        return response.badRequest([], "Gagal menambahkan data")
+        flash('Gagal menambahkan transaksi', 'danger')
+        return redirect(url_for('barang_masuk'))
+    
+def tambah_transaksi():
+    try:
+        barang_list = barang.query.all()
+        supplier_list = supplier.query.all()
+        return render_template("tambah_transaksimasuk.html", barang=barang_list, suppliers=supplier_list)
+    except Exception as e:
+        print(e)
+        return response.badRequest([], "Gagal memuat halaman tambah transaksi")
+

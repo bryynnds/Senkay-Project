@@ -99,7 +99,6 @@ def update_kategori_route(id_kategori):
     return KategoriBarangController.update_kategori(id_kategori)
 
 
-
 @app.route('/barang_masuk', methods=['GET', 'POST'])
 def barang_masuk():
     if request.method == 'GET':
@@ -107,29 +106,14 @@ def barang_masuk():
     else:
         return BarangMasukController.save()
 
+@app.route('/tambah_transaksimasuk', methods=['GET'])
+def tambah_transaksimasuk():
+    return BarangMasukController.tambah_transaksi()
 
-@app.route('/barang_masuk/add', methods=['GET', 'POST'])
-def add_barang_masuk():
-    if request.method == 'POST':
-        new_transaksi_masuk = transaksimasuk(
-            id_barang=request.form['id_barang'],
-            jumlah=request.form['jumlah'],
-            id_supplier=request.form['id_supplier'],
-            id_pengguna=request.form['id_pengguna']
-        )
-        db.session.add(new_transaksi_masuk)
-        db.session.commit()
-        flash('Barang Masuk berhasil ditambahkan!')
-        return redirect(url_for('barang_masuk'))
-    return render_template('add_barang_masuk.html')
+@app.route('/save_transaksimasuk', methods=['POST'])
+def save_transaksimasuk():
+    return BarangMasukController.save()
 
-@app.route('/barang_masuk/delete/<int:id>')
-def delete_barang_masuk(id):
-    transaksi_masuk_delete = transaksimasuk.query.get_or_404(id)
-    db.session.delete(transaksi_masuk_delete)
-    db.session.commit()
-    flash('Barang Masuk berhasil dihapus!')
-    return redirect(url_for('barang_masuk'))
 
 # Barang Keluar
 @app.route('/barang_keluar')
