@@ -87,13 +87,13 @@ def formatbarang(data):
     
 def save():
     try:
-        # Ambil data dari formulir tanpa tanggal_keluar
+        # Mengambil data dari request
         id_barang = request.form.get('id_barang')
-        jumlah = request.form.get('jumlah')
+        jumlah = int(request.form.get('jumlah'))  # Pastikan jumlah adalah integer
 
         # Tentukan zona waktu Jakarta
         jakarta_timezone = pytz.timezone('Asia/Jakarta')
-        tanggal_keluar = datetime.now(jakarta_timezone)  # Waktu otomatis WIB
+        tanggal_keluar = datetime.now(jakarta_timezone)
 
         # Membuat instance transaksi keluar baru dengan tanggal otomatis
         transaksikeluars = transaksikeluar(
@@ -102,14 +102,28 @@ def save():
             tanggal_keluar=tanggal_keluar
         )
 
+        # Menambahkan transaksi ke database
         db.session.add(transaksikeluars)
-        db.session.commit()
-        flash('Transaksi baru berhasil ditambahkan', 'success')
+
+        # Memperbarui stok di tabel barang
+        barang_item = barang.query.filter_by(id_barang=id_barang).first()
+        if barang_item:
+            if barang_item.stok >= jumlah:  # Pastikan stok cukup untuk dikurangi
+                barang_item.stok -= jumlah  # Kurangi stok sesuai jumlah transaksi keluar
+                db.session.commit()  # Commit perubahan stok
+                flash('Transaksi keluar berhasil ditambahkan dan stok diperbarui', 'success')
+            else:
+                flash('Stok tidak mencukupi untuk transaksi keluar', 'danger')
+                db.session.rollback()  # Batalkan transaksi jika stok tidak mencukupi
+                return redirect(url_for('tambah_transaksikeluar'))
+        
         return redirect(url_for('barang_keluar'))
     except Exception as e:
         print(e)
-        flash('Gagal menambahkan transaksi', 'danger')
+        db.session.rollback()  # Rollback jika ada error
+        flash('Gagal menambahkan transaksi atau memperbarui stok', 'danger')
         return redirect(url_for('barang_keluar'))
+
     
 def tambah_transaksikeluar():
     try:

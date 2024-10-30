@@ -118,29 +118,37 @@ def formatsupplier(data):
 
 def save():
     try:
-        # Mengambil data dari request (tanpa tanggal_masuk)
+        # Mengambil data dari request
         id_barang = request.form.get('id_barang')
-        jumlah = request.form.get('jumlah')
+        jumlah = int(request.form.get('jumlah'))  # Pastikan jumlah adalah integer
         id_supplier = request.form.get('id_supplier')
 
         # Membuat instance transaksimasuk baru dengan tanggal otomatis
         jakarta_timezone = pytz.timezone('Asia/Jakarta')
-        tanggal_masuk = datetime.now(jakarta_timezone) 
+        tanggal_masuk = datetime.now(jakarta_timezone)
         
         transaksimasuks = transaksimasuk(
             id_barang=id_barang,
             jumlah=jumlah,
-            tanggal_masuk=tanggal_masuk,  # Tanggal otomatis
+            tanggal_masuk=tanggal_masuk,
             id_supplier=id_supplier
         )
-        
+
+        # Menambahkan transaksi ke database
         db.session.add(transaksimasuks)
-        db.session.commit()
-        flash('Transaksi baru berhasil ditambahkan', 'success')
+
+        # Memperbarui stok di tabel barang
+        barang_item = barang.query.filter_by(id_barang=id_barang).first()
+        if barang_item:
+            barang_item.stok += jumlah  # Tambah stok sesuai jumlah transaksi masuk
+            db.session.commit()  # Commit perubahan stok
+
+        flash('Transaksi baru berhasil ditambahkan dan stok diperbarui', 'success')
         return redirect(url_for('barang_masuk'))
     except Exception as e:
         print(e)
-        flash('Gagal menambahkan transaksi', 'danger')
+        db.session.rollback()  # Rollback jika ada error
+        flash('Gagal menambahkan transaksi atau memperbarui stok', 'danger')
         return redirect(url_for('barang_masuk'))
     
 def tambah_transaksi():
