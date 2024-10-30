@@ -119,31 +119,20 @@ def delete_transaksi(id_transaksi):
     return BarangMasukController.delete_transaksi(id_transaksi)
 
 # Barang Keluar
-@app.route('/barang_keluar')
+@app.route('/barang_keluar', methods=['GET', 'POST'])
 def barang_keluar():
-    return BarangKeluarController.index()
+    if request.method == 'GET':
+        return BarangKeluarController.index()
+    else:
+        return BarangKeluarController.save()
 
-@app.route('/barang_keluar/add', methods=['GET', 'POST'])
-def add_barang_keluar():
-    if request.method == 'POST':
-        new_transaksi_keluar = transaksikeluar(
-            id_barang=request.form['id_barang'],
-            jumlah=request.form['jumlah'],
-            id_pengguna=request.form['id_pengguna']
-        )
-        db.session.add(new_transaksi_keluar)
-        db.session.commit()
-        flash('Barang Keluar berhasil ditambahkan!')
-        return redirect(url_for('barang_keluar'))
-    return render_template('add_barang_keluar.html')
+@app.route('/tambah_transaksikeluar', methods=['GET'])
+def tambah_transaksikeluar():
+    return BarangKeluarController.tambah_transaksikeluar()
 
-@app.route('/barang_keluar/delete/<int:id>')
-def delete_barang_keluar(id):
-    transaksi_keluar_delete = transaksikeluar.query.get_or_404(id)
-    db.session.delete(transaksi_keluar_delete)
-    db.session.commit()
-    flash('Barang Keluar berhasil dihapus!')
-    return redirect(url_for('barang_keluar'))
+@app.route('/save_transaksikeluar', methods=['POST'])
+def save_transaksikeluar():
+    return BarangKeluarController.save()
 
 @app.route('/laporan_barangmasuk')
 def laporan_barangmasuk():

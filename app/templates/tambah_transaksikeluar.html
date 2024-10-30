@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="header-bar">
+    <div class="judul">
+        <h1>Tambah Transaksi Keluar</h1>
+    </div>
+</div>
+<form action="{{ url_for('save_transaksikeluar') }}" method="POST">
+    <div class="form-group">
+        <label for="id_barang">Nama Barang:</label>
+        <select name="id_barang" id="id_barang" required>
+            {% for item in barang %}
+            <option value="{{ item.id_barang }}">{{ item.nama_barang }}</option>
+            {% endfor %}
+        </select>
+
+
+        <div class="form-group">
+            <label for="jumlah">Jumlah:</label>
+            <input type="number" name="jumlah" id="jumlah" required>
+        </div>
+
+        <button type="submit" class="btn">Simpan</button>
+</form>
+</div>
+{% endblock %}

@@ -1,7 +1,9 @@
 from app.model.barang import barang
 from app import response, app, db
-from flask import request, redirect, url_for,render_template
+from flask import request, redirect, url_for,render_template, flash
 from app.model.transaksikeluar import transaksikeluar
+import pytz
+from datetime import datetime
 
 def index():
     try:
@@ -85,15 +87,35 @@ def formatbarang(data):
     
 def save():
     try:
-        id_transaksi=request.form.get('id_transaksi')
-        id_barang=request.form.get('id_barang')
-        jumlah=request.form.get('jumlah')
-        tanggal_keluar=request.form.get('tanggal_keluar')
-        
-        transaksikeluars=transaksikeluar(id_transaksi=id_transaksi, id_barang=id_barang, jumlah=jumlah, tanggal_keluar=tanggal_keluar)
+        # Ambil data dari formulir tanpa tanggal_keluar
+        id_barang = request.form.get('id_barang')
+        jumlah = request.form.get('jumlah')
+
+        # Tentukan zona waktu Jakarta
+        jakarta_timezone = pytz.timezone('Asia/Jakarta')
+        tanggal_keluar = datetime.now(jakarta_timezone)  # Waktu otomatis WIB
+
+        # Membuat instance transaksi keluar baru dengan tanggal otomatis
+        transaksikeluars = transaksikeluar(
+            id_barang=id_barang,
+            jumlah=jumlah,
+            tanggal_keluar=tanggal_keluar
+        )
+
         db.session.add(transaksikeluars)
         db.session.commit()
-        return response.success(',','Data Berhasil Ditambah')
+        flash('Transaksi baru berhasil ditambahkan', 'success')
+        return redirect(url_for('barang_keluar'))
     except Exception as e:
         print(e)
+        flash('Gagal menambahkan transaksi', 'danger')
+        return redirect(url_for('barang_keluar'))
+    
+def tambah_transaksikeluar():
+    try:
+        barang_list = barang.query.all()
+        return render_template("tambah_transaksikeluar.html", barang=barang_list)
+    except Exception as e:
+        print(e)
+        return response.badRequest([], "Gagal memuat halaman tambah transaksi")
         
