@@ -154,7 +154,7 @@ def tambah_transaksi():
     
 def delete_transaksi(id_transaksi):
     try:
-        Transaksi = transaksimasuk.query.filter_by(id_transaksi=id_transaksi).first()
+        Transaksi = transaksimasuk.query.filter_by(id_transaksi=id_transaksi).first()   
         
         if not Transaksi:
             flash("Transaksi tidak ditemukan", "danger")
