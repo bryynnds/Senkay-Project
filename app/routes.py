@@ -134,13 +134,7 @@ def tambah_transaksikeluar():
 def save_transaksikeluar():
     return BarangKeluarController.save()
 
-@app.route('/laporan_barangmasuk')
-def laporan_barangmasuk():
-    laporan_masuk = transaksimasuk.query.all()
-    return render_template('laporan_barangmasuk.html', laporan_masuk=laporan_masuk)
-
-@app.route('/laporan_barangkeluar')
-def laporan_barangkeluar():
-    laporan_keluar = transaksikeluar.query.all()
-    return render_template('laporan_barangkeluar.html', laporan_keluar=laporan_keluar)
+@app.route('/delete_transaksikeluar/<id_transaksi>', methods=['GET'])
+def delete_transaksikeluar(id_transaksi):
+    return BarangKeluarController.delete_transaksikeluar(id_transaksi)
 

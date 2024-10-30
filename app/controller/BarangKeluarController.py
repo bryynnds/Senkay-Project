@@ -119,3 +119,19 @@ def tambah_transaksikeluar():
         print(e)
         return response.badRequest([], "Gagal memuat halaman tambah transaksi")
         
+def delete_transaksikeluar(id_transaksi):
+    try:
+        Transaksi = transaksikeluar.query.filter_by(id_transaksi=id_transaksi).first()
+        
+        if not Transaksi:
+            flash("Transaksi tidak ditemukan", "danger")
+            return redirect(url_for('barang_keluar'))
+        
+        db.session.delete(Transaksi)
+        db.session.commit()
+        flash("Transaksi berhasil dihapus", "success")
+        return redirect(url_for('barang_keluar'))
+    except Exception as e:
+        print("Error:", e)
+        flash("Gagal menghapus Transaksi", "danger")
+        return redirect(url_for('barang_keluar'))
