@@ -1,10 +1,12 @@
 from app import db, response
-from flask import render_template, request, url_for, flash, redirect
+from flask import make_response, render_template, request, url_for, flash, redirect
 from app.model.transaksimasuk import transaksimasuk
 from app.model.barang import barang
 from app.model.supplier import supplier
 from datetime import datetime
 import pytz
+from weasyprint import HTML
+import io
 
 def index():
     try:
@@ -175,5 +177,34 @@ def delete_transaksi(id_transaksi):
     except Exception as e:
         print("Error:", e)
         flash("Gagal menghapus Transaksi", "danger")
+        return redirect(url_for('barang_masuk'))
+    
+def cetak_transaksi_masuk():
+    try:
+        # Mengambil data transaksi masuk dengan join tabel barang dan supplier
+        transaksi_masuk = db.session.query(
+            transaksimasuk.id_transaksi,
+            barang.nama_barang,
+            transaksimasuk.jumlah,
+            transaksimasuk.tanggal_masuk,
+            supplier.nama_supplier
+        ).join(barang, transaksimasuk.id_barang == barang.id_barang) \
+         .join(supplier, transaksimasuk.id_supplier == supplier.id_supplier).all()
+
+        # Render template menjadi HTML string
+        html = render_template("cetak_barang_masuk.html", transaksi_masuk=transaksi_masuk)
+
+        # Konversi HTML menjadi PDF
+        pdf_file = HTML(string=html).write_pdf()
+
+        # Mengirim PDF sebagai respons
+        response = make_response(pdf_file)
+        response.headers['Content-Type'] = 'application/pdf'
+        response.headers['Content-Disposition'] = 'attachment; filename=transaksi_masuk.pdf'
+
+        return response
+    except Exception as e:
+        print(e)
+        flash("Gagal mencetak transaksi masuk", "danger")
         return redirect(url_for('barang_masuk'))
 

@@ -4,6 +4,8 @@ from flask import request, redirect, url_for,render_template, flash
 from app.model.transaksikeluar import transaksikeluar
 import pytz
 from datetime import datetime
+from flask import make_response
+from weasyprint import HTML
 
 def index():
     try:
@@ -148,4 +150,31 @@ def delete_transaksikeluar(id_transaksi):
     except Exception as e:
         print("Error:", e)
         flash("Gagal menghapus Transaksi", "danger")
+        return redirect(url_for('barang_keluar'))
+
+def cetak_transaksi_keluar():
+    try:
+        # Query untuk mendapatkan data transaksi barang keluar
+        transaksi_keluar = db.session.query(
+            transaksikeluar.id_transaksi,
+            barang.nama_barang,
+            transaksikeluar.jumlah,
+            transaksikeluar.tanggal_keluar
+        ).join(barang, transaksikeluar.id_barang == barang.id_barang).all()
+
+        # Render template HTML untuk PDF
+        html_content = render_template("cetak_barang_keluar.html", transaksi_keluar=transaksi_keluar)
+        
+        # Konversi HTML ke PDF
+        pdf = HTML(string=html_content).write_pdf()
+
+        # Kirimkan sebagai respons dengan tipe konten PDF
+        response = make_response(pdf)
+        response.headers['Content-Type'] = 'application/pdf'
+        response.headers['Content-Disposition'] = 'inline; filename=transaksi_keluar.pdf'
+        
+        return response
+    except Exception as e:
+        print("Error:", e)
+        flash("Gagal mencetak laporan barang keluar", "danger")
         return redirect(url_for('barang_keluar'))

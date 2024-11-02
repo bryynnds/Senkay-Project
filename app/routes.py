@@ -10,6 +10,12 @@ from app.controller import DataBarangController
 from app.controller import BarangKeluarController
 from app.controller import BarangMasukController
 from app.controller import DashboardController
+from weasyprint import HTML
+import io
+from flask import make_response
+from reportlab.lib.pagesizes import A4
+from reportlab.pdfgen import canvas
+from io import BytesIO
 
 # Dashboard
 @app.route('/', methods=['GET', 'POST'])
@@ -137,4 +143,12 @@ def save_transaksikeluar():
 @app.route('/delete_transaksikeluar/<id_transaksi>', methods=['GET'])
 def delete_transaksikeluar(id_transaksi):
     return BarangKeluarController.delete_transaksikeluar(id_transaksi)
+
+@app.route('/cetak_barang_masuk', methods=['GET'])
+def cetak_barang_masuk():
+    return BarangMasukController.cetak_transaksi_masuk()
+
+@app.route('/cetak_barang_keluar', methods=['GET'])
+def cetak_barang_keluar():
+    return BarangKeluarController.cetak_transaksi_keluar()
 
