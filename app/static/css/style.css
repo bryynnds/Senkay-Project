@@ -244,21 +244,34 @@ form {
 .form-select {
   display: block;
   width: 100%;
-  padding: .375rem 2.25rem .375rem .75rem;
+  padding: .375rem 2.25rem .375rem .75rem; /* ruang untuk panah di kanan */
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
+  color: #12192C;
+  background-color: #fff;
+  border: 1px solid var(--bs-border-color, #12192C); /* warna border cadangan */
+  border-radius: var(--bs-border-radius, 0.25rem);
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+  /* Menghilangkan gaya bawaan */
   -webkit-appearance: none;
   -moz-appearance: none;
-  border: #12192C;
   appearance: none;
+
+  /* Panah custom */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2312192C' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.5 4.5l6 6 6-6H1.5z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right .75rem center;
-  background-size: 16px 12px;
-  border: var(--bs-border-width) solid var(--bs-border-color);
-  border-radius: var(--bs-border-radius);
-  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  background-position: right 0.75rem center;
+  background-size: 1rem; /* Sesuaikan ukuran panah */
 }
+
+.form-select:focus {
+  border-color: #007bff; /* Warna border saat fokus */
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
 
 .form-group {
   margin-bottom: 1.5rem;
@@ -268,16 +281,33 @@ form {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: bold;
+  color: #12192C; /* Sesuaikan warna teks */
 }
 
 .form-group input,
 .form-group textarea {
   width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  padding: .375rem 0.75rem;
   font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #12192C;
+  background-color: #fff;
+  border: 1px solid var(--bs-border-color, #12192C); /* Warna border */
+  border-radius: var(--bs-border-radius, 0.25rem);
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+  /* Agar tampak serasi dengan dropdown */
+  appearance: none;
 }
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #007bff; /* Warna border saat fokus */
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
 
 button[type="submit"] {
   display: inline-block;
@@ -436,6 +466,17 @@ button[type="submit"]:hover {
   background-color: var(--first-color);
 }
 
+.simpan {
+  padding: 8px 16px;
+  margin-right: 40px;
+  background-color: var(--second-color);
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
 .cetak {
   padding: 8px 16px;
   margin-right: 10px;
@@ -445,6 +486,10 @@ button[type="submit"]:hover {
   border-radius: 5px;
   font-weight: bold;
   transition: background-color 0.3s;
+}
+
+.cetak:hover {
+  background-color: var(--first-color);
 }
 
 .alert-container {
