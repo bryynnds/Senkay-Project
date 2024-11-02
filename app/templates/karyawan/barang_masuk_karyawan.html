@@ -1,0 +1,36 @@
+{% extends "/karyawan/base_karyawan.html" %}
+
+{% block content %}
+<div class="header-bar">
+  <div class="judul">
+    <h1>Transaksi Barang Masuk</h1>
+  </div>
+  <div class="action-buttons">
+    <a href="{{ url_for('cetak_barang_masuk') }}" type="button" class="btn cetak">Cetak Laporan</a>
+  </div>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Kode Transaksi</th>
+      <th>Nama Barang</th>
+      <th>Jumlah</th>
+      <th>Nama Supplier</th>
+      <th>Tanggal Masuk</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for transaksi in transaksi_masuk %}
+    <tr>
+      <td>{{ transaksi.id_transaksi }}</td>
+      <td>{{ transaksi.nama_barang }}</td>
+      <td>{{ transaksi.jumlah }}</td>
+      <td>{{ transaksi.nama_supplier }}</td>
+      <td>{{ transaksi.tanggal_masuk }}</td>
+    </tr>
+    {% endfor %}
+
+  </tbody>
+</table>
+{% endblock %}

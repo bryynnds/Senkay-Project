@@ -1,0 +1,35 @@
+{% extends "/karyawan/base_karyawan.html" %}
+
+{% block content %}
+<div class="header-bar">
+  <div class="judul">
+    <h1>Data Barang</h1>
+  </div>
+</div>
+
+<!-- Tabel yang menampilkan data barang -->
+<table>
+  <thead>
+    <tr>
+      <th>ID Barang</th>
+      <th>Nama Barang</th>
+      <th>Deskripsi</th>
+      <th>Kategori</th>
+      <th>Stok</th>
+      <th>Harga</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in barang %}
+    <tr>
+      <td>{{ item.id_barang }}</td>
+      <td>{{ item.nama_barang }}</td>
+      <td>{{ item.deskripsi }}</td>
+      <td>{{ item.kategori }}</td>
+      <td>{{ item.stok }}</td>
+      <td>{{ item.harga }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -171,6 +171,16 @@ def delete_barang(id_barang):
         print("Error:", e)
         flash("Gagal menghapus data barang", "danger")
         return redirect(url_for('data_barang'))
+    
+def index_karyawan():
+    try:
+        Barang = db.session.query(barang, kategoribarang.nama_kategori)\
+                           .join(kategoribarang, barang.id_kategori == kategoribarang.id_kategori).all()
+        data = formatarray(Barang)
+        return render_template("/karyawan/data_barang_karyawan.html", barang=data)
+    except Exception as e:
+        print(e)
+        return jsonify({'error': str(e), 'message': "Gagal mengambil data"}), 500
 
 
 

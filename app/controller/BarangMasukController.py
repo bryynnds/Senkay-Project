@@ -208,3 +208,20 @@ def cetak_transaksi_masuk():
         flash("Gagal mencetak transaksi masuk", "danger")
         return redirect(url_for('barang_masuk'))
 
+def index_karyawan():
+    try:
+        # Query untuk mengambil data transaksi masuk dengan join ke tabel barang dan supplier
+        transaksi_masuk = db.session.query(
+            transaksimasuk.id_transaksi,
+            barang.nama_barang,
+            transaksimasuk.jumlah,
+            transaksimasuk.tanggal_masuk,
+            supplier.nama_supplier
+        ).join(barang, transaksimasuk.id_barang == barang.id_barang) \
+         .join(supplier, transaksimasuk.id_supplier == supplier.id_supplier).all()
+
+        # Kirim data transaksi_masuk ke template
+        return render_template("/karyawan/barang_masuk_karyawan.html", transaksi_masuk=transaksi_masuk)
+    except Exception as e:
+        print(e)
+        return response.badRequest([], "Gagal mengambil data barang masuk")

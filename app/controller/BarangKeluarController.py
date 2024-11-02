@@ -178,3 +178,19 @@ def cetak_transaksi_keluar():
         print("Error:", e)
         flash("Gagal mencetak laporan barang keluar", "danger")
         return redirect(url_for('barang_keluar'))
+    
+def index_karyawan():
+    try:
+        # Query join barangkeluar dan barang untuk mendapatkan nama_barang
+        transaksi_keluar = db.session.query(
+            transaksikeluar.id_transaksi,
+            barang.nama_barang,
+            transaksikeluar.jumlah,
+            transaksikeluar.tanggal_keluar
+        ).join(barang, transaksikeluar.id_barang == barang.id_barang).all()
+
+        # Kirim data transaksi_keluar ke template
+        return render_template("/karyawan/barang_keluar_karyawan.html", transaksi_keluar=transaksi_keluar)
+    except Exception as e:
+        print(e)
+        return response.badRequest([], "Gagal mengambil data barang keluar")
