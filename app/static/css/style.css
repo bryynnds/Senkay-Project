@@ -527,3 +527,9 @@ button[type="submit"]:hover {
 .alert-info {
   background-color: #17a2b8;
 }
+
+.logo {
+  width: 60px;
+  padding: 5px;
+  margin-right: 10px;
+}
