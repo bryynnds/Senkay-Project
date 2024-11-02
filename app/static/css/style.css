@@ -325,7 +325,7 @@ button[type="submit"]:hover {
 
 .topbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   background-color: #1f3264;
   padding: 10px 20px;
@@ -475,6 +475,21 @@ button[type="submit"]:hover {
   border-radius: 5px;
   font-weight: bold;
   transition: background-color 0.3s;
+}
+
+.cetak-2 {
+  padding: 8px 16px;
+  margin-right: 40px;
+  background-color: #30bd61;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.cetak-2:hover {
+  background-color: var(--first-color);
 }
 
 .cetak {
