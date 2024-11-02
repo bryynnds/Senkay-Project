@@ -1,3 +1,2 @@
 # Senkay-Project
-
-# Ini adalah projek sistem gudang kelompok 2 kami
+Ini adalah project kami, kelompok 2 sistem informasi kelas SI-22A2
