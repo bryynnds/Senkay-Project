@@ -1,6 +1,7 @@
 from app.model.barang import barang
 from app import response, app, db
-from flask import request, redirect, url_for,render_template, jsonify, flash
+from flask import request, redirect, url_for,render_template, jsonify, flash, make_response
+from weasyprint import HTML
 from app.model.kategoribarang import kategoribarang
 
 def index():
@@ -183,6 +184,31 @@ def index_karyawan():
     except Exception as e:
         print(e)
         return jsonify({'error': str(e), 'message': "Gagal mengambil data"}), 500
+    
+def cetak_barang():
+    try:
+        # Mengambil data transaksi masuk dengan join tabel barang dan supplier
+        Barang = db.session.query(barang, kategoribarang.nama_kategori)\
+                           .outerjoin(kategoribarang, barang.id_kategori == kategoribarang.id_kategori).all()
+        data = formatarray(Barang)
+
+        # Render template menjadi HTML string
+        html = render_template("cetak_data_barang.html", barang=data)
+
+        # Konversi HTML menjadi PDF
+        pdf_file = HTML(string=html).write_pdf()
+
+        # Mengirim PDF sebagai respons
+        response = make_response(pdf_file)
+        response.headers['Content-Type'] = 'application/pdf'
+        response.headers['Content-Disposition'] = 'attachment; filename=data_barang.pdf'
+
+        return response
+    except Exception as e:
+        print(e)
+        flash("Gagal mencetak data barang", "danger")
+        return redirect(url_for('data_barang'))
+    
 
 
 

@@ -5,7 +5,11 @@
   <div class="judul">
     <h1>Data Barang</h1>
   </div>
-  <a href="{{ url_for('tambah_barang') }}" type="button" class="btn tambah-barang">Tambah Barang</a>
+  <div class="action-buttons">
+    <a href="{{ url_for('cetak_data_barang') }}" type="button" class="btn cetak">Cetak Laporan</a>
+    <a href="{{ url_for('tambah_barang') }}" type="button" class="btn tambah-barang">Tambah Barang</a>
+  </div>
+  
 
 </div>
 

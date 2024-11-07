@@ -148,6 +148,10 @@ def save_transaksikeluar():
 def delete_transaksikeluar(id_transaksi):
     return BarangKeluarController.delete_transaksikeluar(id_transaksi)
 
+@app.route('/cetak_data_barang', methods=['GET'])
+def cetak_data_barang():
+    return DataBarangController.cetak_barang()
+
 @app.route('/cetak_barang_masuk', methods=['GET'])
 def cetak_barang_masuk():
     return BarangMasukController.cetak_transaksi_masuk()
