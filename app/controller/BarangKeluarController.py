@@ -15,7 +15,7 @@ def index():
             barang.nama_barang,
             transaksikeluar.jumlah,
             transaksikeluar.tanggal_keluar
-        ).join(barang, transaksikeluar.id_barang == barang.id_barang).all()
+        ).outerjoin(barang, transaksikeluar.id_barang == barang.id_barang).all()
 
         # Kirim data transaksi_keluar ke template
         return render_template("barang_keluar.html", transaksi_keluar=transaksi_keluar)
@@ -160,7 +160,7 @@ def cetak_transaksi_keluar():
             barang.nama_barang,
             transaksikeluar.jumlah,
             transaksikeluar.tanggal_keluar
-        ).join(barang, transaksikeluar.id_barang == barang.id_barang).all()
+        ).outerjoin(barang, transaksikeluar.id_barang == barang.id_barang).all()
 
         # Render template HTML untuk PDF
         html_content = render_template("cetak_barang_keluar.html", transaksi_keluar=transaksi_keluar)
@@ -187,7 +187,7 @@ def index_karyawan():
             barang.nama_barang,
             transaksikeluar.jumlah,
             transaksikeluar.tanggal_keluar
-        ).join(barang, transaksikeluar.id_barang == barang.id_barang).all()
+        ).outerjoin(barang, transaksikeluar.id_barang == barang.id_barang).all()
 
         # Kirim data transaksi_keluar ke template
         return render_template("/karyawan/barang_keluar_karyawan.html", transaksi_keluar=transaksi_keluar)

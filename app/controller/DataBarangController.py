@@ -5,13 +5,15 @@ from app.model.kategoribarang import kategoribarang
 
 def index():
     try:
+        # Mengubah ke left join agar barang tanpa kategori tetap ditampilkan
         Barang = db.session.query(barang, kategoribarang.nama_kategori)\
-                           .join(kategoribarang, barang.id_kategori == kategoribarang.id_kategori).all()
+                           .outerjoin(kategoribarang, barang.id_kategori == kategoribarang.id_kategori).all()
         data = formatarray(Barang)
         return render_template("data_barang.html", barang=data)
     except Exception as e:
         print(e)
         return jsonify({'error': str(e), 'message': "Gagal mengambil data"}), 500
+
 
 def formatarray(datas):
     array = []
@@ -175,7 +177,7 @@ def delete_barang(id_barang):
 def index_karyawan():
     try:
         Barang = db.session.query(barang, kategoribarang.nama_kategori)\
-                           .join(kategoribarang, barang.id_kategori == kategoribarang.id_kategori).all()
+                           .outerjoin(kategoribarang, barang.id_kategori == kategoribarang.id_kategori).all()
         data = formatarray(Barang)
         return render_template("/karyawan/data_barang_karyawan.html", barang=data)
     except Exception as e:

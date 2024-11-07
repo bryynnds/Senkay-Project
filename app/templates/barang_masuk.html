@@ -26,9 +26,9 @@
     {% for transaksi in transaksi_masuk %}
     <tr>
       <td>{{ transaksi.id_transaksi }}</td>
-      <td>{{ transaksi.nama_barang }}</td>
+      <td>{{ transaksi.nama_barang if transaksi.nama_barang else "Barang Dihapus" }}</td>
       <td>{{ transaksi.jumlah }}</td>
-      <td>{{ transaksi.nama_supplier }}</td>
+      <td>{{ transaksi.nama_supplier if transaksi.nama_supplier else "Supplier Dihapus" }}</td>
       <td>{{ transaksi.tanggal_masuk }}</td>
       
       <td>

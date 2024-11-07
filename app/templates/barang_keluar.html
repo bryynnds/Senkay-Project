@@ -26,7 +26,7 @@
     {% for transaksi in transaksi_keluar %}
     <tr>
       <td>{{ transaksi.id_transaksi }}</td>
-      <td>{{ transaksi.nama_barang }}</td>
+      <td>{{ transaksi.nama_barang if transaksi.nama_barang else "Barang Dihapus" }}</td>
       <td>{{ transaksi.jumlah }}</td>
       <td>{{ transaksi.tanggal_keluar }}</td>
       <td>

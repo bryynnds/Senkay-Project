@@ -17,8 +17,8 @@ def index():
             transaksimasuk.jumlah,
             transaksimasuk.tanggal_masuk,
             supplier.nama_supplier
-        ).join(barang, transaksimasuk.id_barang == barang.id_barang) \
-         .join(supplier, transaksimasuk.id_supplier == supplier.id_supplier).all()
+        ).outerjoin(barang, transaksimasuk.id_barang == barang.id_barang) \
+         .outerjoin(supplier, transaksimasuk.id_supplier == supplier.id_supplier).all()
 
         # Kirim data transaksi_masuk ke template
         return render_template("barang_masuk.html", transaksi_masuk=transaksi_masuk)
@@ -188,8 +188,8 @@ def cetak_transaksi_masuk():
             transaksimasuk.jumlah,
             transaksimasuk.tanggal_masuk,
             supplier.nama_supplier
-        ).join(barang, transaksimasuk.id_barang == barang.id_barang) \
-         .join(supplier, transaksimasuk.id_supplier == supplier.id_supplier).all()
+        ).outerjoin(barang, transaksimasuk.id_barang == barang.id_barang) \
+         .outerjoin(supplier, transaksimasuk.id_supplier == supplier.id_supplier).all()
 
         # Render template menjadi HTML string
         html = render_template("cetak_barang_masuk.html", transaksi_masuk=transaksi_masuk)
@@ -217,8 +217,8 @@ def index_karyawan():
             transaksimasuk.jumlah,
             transaksimasuk.tanggal_masuk,
             supplier.nama_supplier
-        ).join(barang, transaksimasuk.id_barang == barang.id_barang) \
-         .join(supplier, transaksimasuk.id_supplier == supplier.id_supplier).all()
+        ).outerjoin(barang, transaksimasuk.id_barang == barang.id_barang) \
+         .outerjoin(supplier, transaksimasuk.id_supplier == supplier.id_supplier).all()
 
         # Kirim data transaksi_masuk ke template
         return render_template("/karyawan/barang_masuk_karyawan.html", transaksi_masuk=transaksi_masuk)
